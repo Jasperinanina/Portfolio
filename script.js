@@ -15,7 +15,7 @@ const works = [
   { title: "Vulkaan seks", description: "Vulkaan seks", image: "images/works/thumb/vulkaan-seks.jpg", orbit: 3, closeups: [
     "images/works/closeups/vulkaanseks-1.jpg",
     "images/works/closeups/vulkaanseks-2.jpg",
-    "images/works/closeups/vulkaanseks-3.jpg",
+    "images/works/closeups/vulkaanseks-3.JPG",
   ],  
     size: "51x20x25cm",
     material: "Ceramic",

@@ -434,8 +434,9 @@ li img{
 
   #work-info{
     height: auto;
-    left: 10vw;
+    left: 20vw;
     top: 0.5em;
+    width: 15vw;
   }
 
   .work-window{
@@ -457,6 +458,12 @@ li img{
 
   .rotate-message p{
     font-size: 3.3vw;
+  }
+
+  #cv-button{
+    position: relative;
+    margin-top: -3em;
+
   }
 
 }
