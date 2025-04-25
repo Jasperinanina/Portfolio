@@ -1,0 +1,453 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: rgb(4, 255, 0);
+  image-rendering: optimizeSpeed;
+  font-size: clamp(10px, 1.2vw, 15px);
+}
+
+body {
+  font-family: sans-serif;
+  background: #000;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background-image: url(images/background-1.jpg);
+  background-size: cover;
+}
+
+#original-image{
+  height: 100%;
+  width: 100vw;
+  position: absolute;
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 99998;
+}
+
+#original-image img{
+  height: 45vw;
+  width: auto;
+  display: hidden;
+  border: 2px solid rgb(4, 255, 0);
+}
+
+#original-image img[alt$="prophecy"] {
+  height: 30vw !important;
+}
+
+
+#border {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgb(4, 255, 0);
+}
+
+#menu {
+  padding: 1rem;
+  position: absolute;
+  z-index: 99999;
+}
+
+#menu ul {
+  list-style: none;
+}
+
+#menu li {
+  margin-bottom: 0.2rem;
+  position: relative;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#universe {
+  flex: 1;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+#orbit-system {
+  position: absolute;
+  top: 35%;
+  left: 56%;
+  height: 70vh;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.orbit-path {
+  position: absolute;
+  border: 1px solid rgb(4, 255, 0);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.orbit-path[data-index="9"] {
+  border: 1px solid rgb(255, 0, 0);
+}
+
+#centerpiece {
+  width: 5vw;
+  height: 5vw;
+  position: absolute;
+  border-radius: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  background-image: url(images/Sun.svg) !important;
+  z-index: -1;
+}
+
+#me{
+  display: none;
+  width: 5vw;
+  height: 5vw;
+  margin-top: 2vw;
+  margin-left: 5vw;
+  border: 2px solid rgb(4, 255, 0);
+
+}
+
+div#centerpiece:hover img{
+  display: block;
+}
+
+.planet-container {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.planet {
+  position: relative;
+  width: 0.8vw;
+  height: 0.8vw;
+  background: rgb(4, 255, 0);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.planet-container[data-index="18"] .planet{
+  background: none;
+  width: 2.5vw;
+  height: 2vw;
+  background-image: url(images/Satelite.svg);
+  background-size: cover;
+  rotate: -50deg;
+}
+
+.planet-container[data-index="10"] .planet{
+  background: none;
+  width: 2.2vw;
+  height: 1.05vw;
+  border-radius: 0;
+  background-image: url(images/Saturn.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  rotate: 3deg;
+}
+
+.planet-container[data-index="3"] .planet{
+  background: none;
+  width: 2.2vw;
+  height: 1.05vw;
+  border-radius: 0;
+  background-image: url(images/Saturn.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  rotate: 3deg;
+}
+
+.planet-container[data-index="8"] .planet{
+  background: none;
+  width: 2.2vw;
+  height: 1.05vw;
+  border-radius: 0;
+  background-image: url(images/Saturn-double.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.planet-container[data-index="16"] .planet{
+  background: none;
+  width: 2.2vw;
+  height: 1.05vw;
+  border-radius: 0;
+  background-image: url(images/Saturn-double.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.work-window {
+  position: fixed;
+  background: #222;
+  border: 1px solid rgb(4, 255, 0);
+  padding: 5px;
+  height: 20vh;
+  text-align: right;
+  font-size: 12px;
+  display: none;
+}
+
+.work-window img {
+  width: auto;
+  height: 100%;
+  display: block;
+  padding-bottom: 15px;
+  margin-bottom: -12px;
+}
+
+.Work-window.hidden{
+  pointer-events: none;
+}
+
+
+.work-window[data-index="18"] {
+  width: 0px;
+  height: 0px;
+  display: none !important;
+}
+
+.logo {
+  position: fixed;
+  display: flex;
+  bottom: 0;
+  right: 0;
+  margin: 1em;
+  text-align: right;
+}
+
+.logo img {
+  position: relative;
+  width: 18vw;
+  height: 18vw;
+  border: 2px solid rgb(4, 255, 0);
+  padding: 1em;
+}
+
+#Name{
+  margin-right: -17vw;
+  margin-top: 1vw;
+  z-index: 50;
+}
+
+#Name a{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#contact{
+  padding-top: 200px;
+}
+
+
+#moreinfo{
+  position: absolute;
+  text-decoration: underline;
+  bottom: 19vw;
+  top: 0;
+  right: 0;
+  margin: 1em;
+  width: 36vw;
+  text-align: right;
+  height: auto;
+  display: none;
+}
+
+#close-ups{
+  position: fixed;
+  bottom: 0;
+  right: 18.9vw;
+  margin: 1em;
+  z-index: 50;
+  list-style: none;
+  display: flex;
+}
+
+#close-ups li{
+  width: 18vw;
+  height: 18vw;
+  border: 2px solid rgb(4, 255, 0);
+  margin-left: 1vw;
+  display: none;
+  text-align: right;
+}
+
+li img{
+  width: 100%;
+  display: inline-block;
+  
+}
+
+#work-info{
+  padding: 0.5em;
+  border: none !important;
+  position: absolute;
+  bottom: 1vw;
+  left: 5.5vw;
+  width: 18vw;
+  height: 18vw;
+  display: block;
+  text-align: right;
+  z-index: 99999;
+}
+
+
+#originalLink, #closeoriginallink{
+  display: none;
+}
+
+#connector-line {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  pointer-events: none;
+}
+
+#connector-line line {
+  pointer-events: none;
+  z-index: 201;
+}
+
+#extraline {
+  z-index: -3 !important;
+  position: fixed;
+  width: 100%; 
+  height: 100%; 
+  top: 34.86%;
+  border-top: 2px dashed rgb(4, 255, 0);
+  margin-left: 23.4vw;
+}
+
+#LineGravity, #LineGravity2 {
+  position: absolute;
+  width: 50%;
+  height: auto;
+  z-index: -5;
+  filter: grayscale(50%);
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+#artist-cv{
+  padding: 1em 1.5em;
+  color: red;
+  left: 0em;
+  top: 0;
+  text-align: left;
+  padding-bottom: 2em;
+  width: 100%;
+}
+
+#artist-cv p{
+  text-decoration: underline;
+
+} 
+
+#artist-cv li{
+  list-style-type: "*";
+
+}
+
+#cv-button{
+  position: absolute;
+  padding: 1em 1em;
+  bottom: 0;
+  z-index: 9999999;
+}
+
+#cv-button-2{
+  position: relative;
+  padding: 1em 1em;
+  bottom: 0;
+  z-index: 9999999;
+}
+
+#overflowfix{
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#rotate-warning {
+  position: fixed;
+  z-index: 99999999;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2em;
+  text-align: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  align-items: center;
+  align-content: center;
+}
+
+.rotate-message {
+  width: 100vw;
+  text-align: center;
+}
+
+.rotate-message img{
+  width: 70%;
+}
+
+@media (pointer:none), (pointer:coarse) {
+  * {
+    font-size: clamp(12px, 1.2vw, 16px);
+  }
+
+  #orbit-system {
+    top: 40%;
+    left: 60%;
+    height: 100%;
+    width: 100%;
+    overflow: visible;
+    pointer-events: none
+  }
+  .logo{
+    margin: 1em;
+  }
+
+  #work-info{
+    height: auto;
+  }
+
+  .work-window{
+    padding: 0;
+    margin: 0;
+  }
+
+  .work-window img{
+    padding: 0;
+  }
+
+  .work-window p{
+    display: none;
+  }
+}
+
+
+
+
+
