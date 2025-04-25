@@ -415,7 +415,7 @@ li img{
 
 @media (pointer:none), (pointer:coarse) {
   * {
-    font-size: 2.05vh;
+    font-size: 3.3vh;
   }
 
   #orbit-system {
@@ -441,7 +441,8 @@ li img{
 
   #work-info{
     height: auto;
-    left: 60vw;
+    left: 20vw;
+    top: 0.5em;
   }
 
   .work-window{
