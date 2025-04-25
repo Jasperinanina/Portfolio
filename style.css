@@ -367,15 +367,8 @@ li img{
 #cv-button{
   position: absolute;
   padding: 1em 1em;
-  bottom: 0;
   z-index: 9999999;
-}
-
-#cv-button-2{
-  position: relative;
-  padding: 1em 1em;
   bottom: 0;
-  z-index: 9999999;
 }
 
 #overflowfix{
@@ -441,7 +434,7 @@ li img{
 
   #work-info{
     height: auto;
-    left: 20vw;
+    left: 10vw;
     top: 0.5em;
   }
 

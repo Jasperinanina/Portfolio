@@ -20,7 +20,7 @@ const works = [
     size: "51x20x25cm",
     material: "Ceramic",
     year: "2023",
-    original: "images/works/vulkaan-seks.jpg" },
+    original: "images/works/vulkaan-seks.JPG" },
 //WORK 5: WIEHOEE
   { title: "Wiehoee", description: "Wiehoee", image: "images/works/thumb/wiehoee.jpg", orbit: 3, closeups: [],  
   size: "58x83",
