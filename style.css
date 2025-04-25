@@ -420,6 +420,12 @@ li img{
     pointer-events: none
   }
 
+  #extraline {
+    position: absolute;
+    top: 39.76%;
+    margin-left: 27.4vw;
+  }
+
   #original-image img{
     height: 35vw;
   }
@@ -434,7 +440,8 @@ li img{
 
   #work-info{
     height: auto;
-    left: 20vw;
+    left: 15.4vw;
+    padding: 0.5em 0 0 0;
     top: 0.5em;
     width: 15vw;
   }
