@@ -455,6 +455,10 @@ li img{
     overflow-y: visible;
   }
 
+  .rotate-message p{
+    font-size: 3.3vw;
+  }
+
 }
 
 
