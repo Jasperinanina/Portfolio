@@ -94,6 +94,10 @@ body {
   border: 1px solid rgb(255, 0, 0);
 }
 
+.orbit-path[data-index="15"] {
+  border: none;
+}
+
 #centerpiece {
   width: 5vw;
   height: 5vw;
@@ -137,6 +141,12 @@ div#centerpiece:hover img{
   z-index: 2;
 }
 
+.moon {
+  pointer-events: none;
+  position: absolute;
+}
+
+
 .planet-container[data-index="18"] .planet{
   background: none;
   width: 2.5vw;
@@ -144,6 +154,15 @@ div#centerpiece:hover img{
   background-image: url(images/Satelite.svg);
   background-size: cover;
   rotate: -50deg;
+}
+
+.planet-container[data-index="19"] .planet{
+  background: none;
+  width: 2.2vw;
+  height: 2vw;
+  background-image: url(images/Alien-thibeau.svg);
+  background-size: cover;
+  border-radius: 0;
 }
 
 .planet-container[data-index="10"] .planet{
@@ -168,7 +187,7 @@ div#centerpiece:hover img{
   rotate: 3deg;
 }
 
-.planet-container[data-index="8"] .planet{
+.planet-container[data-index="7"] .planet{
   background: none;
   width: 2.2vw;
   height: 1.05vw;
@@ -213,10 +232,26 @@ div#centerpiece:hover img{
 
 
 .work-window[data-index="18"] {
-  width: 0px;
-  height: 0px;
-  display: none !important;
+  border: none;
+  background: none !important;
+  height: 20px;
+  padding-top: 140px;
+  
+
 }
+.work-window[data-index="18"] img{
+  color: red;
+  
+
+}
+.work-window[data-index="19"] {
+  border: none;
+  background: none !important;
+  height: 20px;
+  padding-top: 140px;
+
+}
+
 
 .logo {
   position: fixed;

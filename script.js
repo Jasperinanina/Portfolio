@@ -130,6 +130,8 @@ const works = [
   original: "images/works/zwartgatje.jpg" },
   //SATELITE
   { title: "", description: "", image: "", orbit: 9, closeups: [] },
+  //THIBEAU :)
+  { title: "", description: "", image: "", orbit: 15, closeups: [] },
 ];
 
 const menuList = document.getElementById("work-list");
@@ -140,8 +142,9 @@ const orbitMap = new Map();
 let openWorkWindows = [];
 let currentCloseUpPlanet = null;
 let suppressWorkInfoClose = false;
+let forceShowCloseUps = false; 
 
-const orbitRotations = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 5, 6: 10, 7: 0, 8: 0, 9: -10 };
+const orbitRotations = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 5, 6: 10, 7: 0, 8: 0, 9: -10, 15:-60 };
 
 window.addEventListener("load", checkOrientation);
 window.addEventListener("resize", checkOrientation);
@@ -238,16 +241,38 @@ function createPlanetsAndMenu() {
 
     const planet = document.createElement("div");
     planet.className = "planet";
-    planet.addEventListener("click", () => showWorkWindow(index));
+    
+    if (index === 18) {
+      planet.style.cursor = "pointer";
+      planet.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.location.href = "mailto:jasper.nollet1@gmail.com";
+      });
+    } if(index === 19){
+      planet.style.cursor = "pointer";
+      planet.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.location.href = "https://thibeaukindt.eu";
+      });
+    }else {
+      planet.addEventListener("click", () => showWorkWindow(index));
+    }
+    
     planet.addEventListener("mouseenter", () => previewWorkWindow(index, false));
     planet.addEventListener("mouseleave", () => previewWorkWindow(index, true));
+
+
     container.appendChild(planet);
     orbitSystem.appendChild(container);
 
     const windowEl = document.createElement("div");
     windowEl.className = "work-window hidden";
     windowEl.setAttribute("aria-hidden", "true");
-    windowEl.innerHTML = `<img src="${image}" alt="${title || 'work image'}" /><p>${title}</p>`;
+    if(index === 19){
+      windowEl.innerHTML = `<img src="${image}" alt="${title || 'universe created by thibeau'}" /><p>${title}</p>`;
+    }else{
+    windowEl.innerHTML = `<img src="${image}" alt="${title || 'jasper.nollet1@gmail.com'}" /><p>${title}</p>`;
+    }
     windowEl.dataset.index = index;
     document.body.appendChild(windowEl);
 
@@ -262,6 +287,35 @@ function createPlanetsAndMenu() {
       yRadius,
       speed: 0.001 + Math.PI * 0.0008,
     });
+
+    if (works[index].closeups && works[index].closeups.length > 0) {
+      planet.style.width = "1.2vw";
+      planet.style.height = "1.2vw";
+    
+      const moons = [];
+      const moonCount = works[index].closeups.length;
+    
+      for (let m = 0; m < moonCount; m++) {
+        const baseRotation = Math.random() * 2 * Math.PI;
+        const angleOffset = baseRotation + (2 * Math.PI * m) / moonCount;   
+        const moon = document.createElement("div");
+        moon.className = "moon";
+        moon.style.width = "0.3vw";
+        moon.style.height = "0.3vw";
+        moon.style.background = "rgb(4, 255, 0)";
+        moon.style.borderRadius = "50%";
+        moon.style.position = "absolute";
+        moon.dataset.angle = angleOffset;
+        planet.appendChild(moon);
+        moons.push(moon);
+      }
+    
+      planets[index].moons = moons;
+      planets[index].moonOrbitRadius = 1.5;
+      planets[index].moonAngle = 0;
+    
+          
+      }
   });
 }
 
@@ -294,6 +348,24 @@ function animate() {
       }
       
     }
+
+    if (p.moons && p.moons.length > 0) {
+      p.moonAngle += 0.01; 
+    
+      const moonRadiusPx = parseFloat(getComputedStyle(document.documentElement).fontSize) * p.moonOrbitRadius;
+    
+      p.moons.forEach((moon, i) => {
+        const baseAngle = parseFloat(moon.dataset.angle);
+        const angle = baseAngle + p.moonAngle;
+    
+        const x = Math.cos(angle) * moonRadiusPx;
+        const y = Math.sin(angle) * moonRadiusPx;
+    
+        moon.style.left = `${0.5 * p.planet.offsetWidth + x}px`;
+        moon.style.top = `${0.5 * p.planet.offsetHeight + y}px`;
+      });
+    }
+    
     
   });
 
@@ -367,7 +439,19 @@ if (img) {
       if (works[index].closeups.length > 0) {
         img.style.cursor = "pointer"; 
         img.addEventListener("click", () => {
-          showCloseUpsFor(index);
+          const isSameWork = currentCloseUpIndex === index;
+
+          if (isSameWork) {
+            forceShowCloseUps = false;
+            showCloseUpsFor(null);
+            document.getElementById("closeupLink").style.display = "inline";
+            document.getElementById("closecloseupslink").style.display = "none";
+          } else {
+            forceShowCloseUps = true;
+            showCloseUpsFor(index);
+            document.getElementById("closeupLink").style.display = "none";
+            document.getElementById("closecloseupslink").style.display = "inline";
+          }
         });
       }
       img.dataset.closeupBound = "true";
@@ -399,7 +483,8 @@ document.addEventListener("click", (e) => {
   const clickedInsideSomething = (
     e.target.closest(".planet-container") ||
     e.target.closest("#work-list") ||
-    e.target.closest(".work-window")
+    e.target.closest(".work-window")||
+    e.target.closest("#work-info")
   );
 
   if (!clickedInsideSomething) {
@@ -483,9 +568,7 @@ closeUpWindows.forEach((li, i) => {
 let currentCloseUpIndex = null;
 
 function showCloseUpsFor(index) {
-  if (index === null || index === currentCloseUpIndex) {
-  const infoBox = document.getElementById("work-info");
-  if (!suppressWorkInfoClose && infoBox) infoBox.style.display = "none";
+  if (!forceShowCloseUps && (index === null || index === currentCloseUpIndex)) {
     suppressWorkInfoClose = false; 
     currentCloseUpPlanet = null;
     currentCloseUpIndex = null;
@@ -497,8 +580,11 @@ function showCloseUpsFor(index) {
       closeUpLines[i].setAttribute("x2", 0);
       closeUpLines[i].setAttribute("y2", 0);
     });
+    document.getElementById("closecloseupslink").style.display = "none";
     return;
   }
+
+  forceShowCloseUps = false; 
 
   const work = works[index];
   const planet = planets[index];
@@ -536,19 +622,39 @@ function showWorkInfo(index) {
 
   const link = document.getElementById("originalLink");
   const closeLink = document.getElementById("closeoriginallink");
+  const closeupLink = document.getElementById("closeupLink");
+  const closeCloseupsLink = document.getElementById("closecloseupslink");
+
   if (work.original) {
     link.style.display = "inline";
     closeLink.style.display = "none";
   } else {
     link.style.display = "none";
     closeLink.style.display = "none";
-  }  
+  }
+  
+  if (work.closeups && work.closeups.length > 0) {
+    closeupLink.style.display = "inline";
+    closeCloseupsLink.style.display = "none";
+  } else {
+    closeupLink.style.display = "none";
+    closeCloseupsLink.style.display = "none";
+  }
+
+  if (Array.isArray(work.closeups) && work.closeups.length > 0) {
+    closeupLink.style.display = "inline";
+    closeCloseupsLink.style.display = "none";
+  } else {
+    closeupLink.style.display = "none";
+    closeCloseupsLink.style.display = "none";
+  }
 
   const workInfo = document.getElementById("work-info");
   if (workInfo) {
     workInfo.style.display = "block";
   }
 }
+
 
 function updateCloseUpLines() {
   if (!currentCloseUpPlanet) return;
@@ -584,19 +690,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (moreInfoLink && moreInfoBox) {
     moreInfoBox.style.display = "none"; 
-
     moreInfoLink.addEventListener("click", (e) => {
       e.preventDefault();
       const isVisible = moreInfoBox.style.display === "block";
       moreInfoBox.style.display = isVisible ? "none" : "block";
     });
   }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+  
   const originalLink = document.getElementById("originalLink");
   const closeOriginalLink = document.getElementById("closeoriginallink");
-  const workInfo = document.getElementById("work-info");
 
   let originalImageContainer = document.getElementById("original-image");
   if (!originalImageContainer) {
@@ -629,22 +731,46 @@ document.addEventListener("DOMContentLoaded", () => {
     closeOriginalLink.style.display = "none";
     suppressWorkInfoClose = false;
   });
-  
-originalImageContainer.addEventListener("click", (e) => {
-  e.stopPropagation(); 
-  const clickedInsideImage = e.target.tagName.toLowerCase() === "img";
-  if (!clickedInsideImage) {
-    originalImageContainer.innerHTML = "";
-    originalImageContainer.classList.add("hidden");
-    originalLink.style.display = "inline";
-    closeOriginalLink.style.display = "none";
-    suppressWorkInfoClose = false; 
-  }
+
+  originalImageContainer.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const clickedInsideImage = e.target.tagName.toLowerCase() === "img";
+    if (!clickedInsideImage) {
+      originalImageContainer.innerHTML = "";
+      originalImageContainer.classList.add("hidden");
+      originalLink.style.display = "inline";
+      closeOriginalLink.style.display = "none";
+      suppressWorkInfoClose = false; 
+    }
+  });
+
+  const closeupLink = document.getElementById("closeupLink");
+  const closeCloseupsLink = document.getElementById("closecloseupslink");
+
+  closeupLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const currentTitle = document.getElementById("Title").textContent;
+    const index = works.findIndex(w => w.title === currentTitle);
+    if (index !== -1) {
+      forceShowCloseUps = true; 
+      showCloseUpsFor(index);
+      closeupLink.style.display = "none";
+      closeCloseupsLink.style.display = "inline";
+    }
+  });
+
+
+  closeCloseupsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    forceShowCloseUps = false;
+    showCloseUpsFor(null);
+    closeCloseupsLink.style.display = "none";
+    closeupLink.style.display = "inline";
+  });
 });
-
-
-});
-
 
 window.addEventListener("load", () => {
   generateOrbitPaths();

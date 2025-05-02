@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68.62 62.26">
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 68.6 62.3">
+  <!-- Generator: Adobe Illustrator 29.0.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 192)  -->
   <defs>
     <style>
-      .cls-1 {
+      .st0 {
         fill: none;
-        stroke: #65ff01;
+        stroke: #ff0303;
         stroke-miterlimit: 10;
         stroke-width: 2.5px;
       }
     </style>
   </defs>
-  <polygon class="cls-1" points="28.3 25.41 24.95 23.28 20.6 20.52 30.35 5.19 38.05 10.09 28.3 25.41"/>
-  <polygon class="cls-1" points="65.91 35.08 37.83 32.58 49.14 13.1 65.91 35.08"/>
-  <line class="cls-1" x1="42.95" y1="22.86" x2="65.91" y2="35.08"/>
-  <line class="cls-1" x1="23.77" y1="22.53" x2="27.13" y2="62.15"/>
-  <line class="cls-1" x1="23.77" y1="22.53" x2=".37" y2="29.86"/>
-  <line class="cls-1" x1="23.77" y1="22.53" x2="16.29" y2="36.44"/>
-  <path class="cls-1" d="M50.79,10.33c-7.38-2.11-13.76,1.38-18.22,8.66-3.12,4.9-2.67,13.73,2.71,17.45l15.51-26.11Z"/>
-  <line class="cls-1" x1="30.35" y1="5.19" x2="32.98" y2=".62"/>
+  <polygon class="st0" points="28.3 25.4 25 23.3 20.6 20.5 30.4 5.2 38 10.1 28.3 25.4"/>
+  <polygon class="st0" points="65.9 35.1 37.8 32.6 49.1 13.1 65.9 35.1"/>
+  <line class="st0" x1="43" y1="22.9" x2="65.9" y2="35.1"/>
+  <line class="st0" x1="23.8" y1="22.5" x2="27.1" y2="62.2"/>
+  <line class="st0" x1="23.8" y1="22.5" x2=".4" y2="29.9"/>
+  <line class="st0" x1="23.8" y1="22.5" x2="16.3" y2="36.4"/>
+  <path class="st0" d="M50.8,10.3c-7.4-2.1-13.8,1.4-18.2,8.7-3.1,4.9-2.7,13.7,2.7,17.5,0,0,15.5-26.1,15.5-26.1Z"/>
+  <line class="st0" x1="30.4" y1="5.2" x2="33" y2=".6"/>
 </svg>
