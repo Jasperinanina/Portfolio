@@ -230,6 +230,7 @@ function createPlanetsAndMenu() {
     const li = document.createElement("li");
     li.textContent = title;
     li.addEventListener("click", () => showWorkWindow(index));
+    li.addEventListener("touchend", () => showWorkWindow(index));
     li.addEventListener("mouseenter", () => previewWorkWindow(index, false));
     li.addEventListener("mouseleave", () => previewWorkWindow(index, true));
     menuList.appendChild(li);
@@ -252,7 +253,7 @@ function createPlanetsAndMenu() {
       planet.style.cursor = "pointer";
       planet.addEventListener("click", (e) => {
         e.stopPropagation();
-        window.location.href = "https://thibeaukindt.eu";
+        window.open("https://thibeaukindt.eu", "_blank")
       });
     }else {
       planet.addEventListener("click", () => showWorkWindow(index));
@@ -480,20 +481,25 @@ window.addEventListener("resize", () => {
 });
 
 document.addEventListener("click", (e) => {
-  const clickedInsideSomething = (
-    e.target.closest(".planet-container") ||
-    e.target.closest("#work-list") ||
-    e.target.closest(".work-window")||
-    e.target.closest("#work-info")
-  );
+  setTimeout(() => {
+    const clickedInsideSomething = (
+      e.target.closest(".planet-container") ||
+      e.target.closest("#work-list") ||
+      e.target.closest(".work-window")||
+      e.target.closest("#work-info")
+    );
 
-  if (!clickedInsideSomething) {
-    openWorkWindows.forEach(index => toggleWorkWindow(index, true));
-    openWorkWindows = [];
-    showCloseUpsFor(null); 
-  }
-
-
+    if (!clickedInsideSomething) {
+      openWorkWindows.forEach(index => toggleWorkWindow(index, true));
+      openWorkWindows = [];
+      showCloseUpsFor(null);
+      
+      const workInfo = document.getElementById("work-info");
+      if (workInfo) {
+        workInfo.style.display = "none"; 
+      }
+    }
+  }, 0);
 });
 
 function updateLineGravityPosition() {
