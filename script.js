@@ -230,7 +230,6 @@ function createPlanetsAndMenu() {
     const li = document.createElement("li");
     li.textContent = title;
     li.addEventListener("click", () => showWorkWindow(index));
-    li.addEventListener("touchend", () => showWorkWindow(index));
     li.addEventListener("mouseenter", () => previewWorkWindow(index, false));
     li.addEventListener("mouseleave", () => previewWorkWindow(index, true));
     menuList.appendChild(li);
@@ -481,7 +480,6 @@ window.addEventListener("resize", () => {
 });
 
 document.addEventListener("click", (e) => {
-  setTimeout(() => {
     const clickedInsideSomething = (
       e.target.closest(".planet-container") ||
       e.target.closest("#work-list") ||
@@ -492,14 +490,15 @@ document.addEventListener("click", (e) => {
     if (!clickedInsideSomething) {
       openWorkWindows.forEach(index => toggleWorkWindow(index, true));
       openWorkWindows = [];
-      showCloseUpsFor(null);
-      
-      const workInfo = document.getElementById("work-info");
-      if (workInfo) {
-        workInfo.style.display = "none"; 
-      }
+      showCloseUpsFor(null); 
+
+
+    const workInfo = document.getElementById("work-info");
+    if (workInfo) {
+    workInfo.style.display = "none"; // <-- hide it
+     }
     }
-  }, 0);
+
 });
 
 function updateLineGravityPosition() {
