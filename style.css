@@ -139,6 +139,7 @@ div#centerpiece:hover img{
   border-radius: 50%;
   cursor: pointer;
   z-index: 2;
+  pointer-events: auto;
 }
 
 .moon {

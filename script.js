@@ -245,14 +245,14 @@ function createPlanetsAndMenu() {
     if (index === 18) {
       planet.style.cursor = "pointer";
       planet.addEventListener("click", (e) => {
-        e.stopPropagation();
         window.location.href = "mailto:jasper.nollet1@gmail.com";
       });
-    } if(index === 19){
+
+  }if(index === 19){
       planet.style.cursor = "pointer";
       planet.addEventListener("click", (e) => {
         e.stopPropagation();
-        window.open("https://thibeaukindt.eu", "_blank")
+        window.open("https://thibeaukindt.eu", "_blank")  
       });
     }else {
       planet.addEventListener("click", () => showWorkWindow(index));
